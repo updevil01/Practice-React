@@ -1,0 +1,142 @@
+import './App.css';
+import {useState} from 'react'
+
+function App() {
+  const [items, setItems] = useState([]);
+
+  const handleAdditems = (newItem) => {
+    setItems((items) => [...items, newItem]);
+  };
+
+  const handleDelete = (id) =>{
+   setItems((items)=>items.filter(item => item.id !== id)) 
+  }
+  const handleClearData = () =>{
+    const confirmed = window.confirm(
+      "Are you sure"
+    )
+    if(confirmed)setItems([]);
+  }
+  const handleToggle = (id) =>{
+    setItems((items)=>
+      items.map(item => 
+        item.id === id ? {...item,packed: !item.packed}
+        :item ))}
+  return (
+    <div className="App">
+      <Logo/>
+      <Form onAdditems={handleAdditems}/>
+      <TaskList items={items} handleDelete={handleDelete} handleToggle={handleToggle} handleClearData={handleClearData} />
+      <Stats items={items}/>
+    </div>
+  );
+}
+
+function Logo(){
+  return <h1>Task </h1>;
+}
+
+function Form({onAdditems}){
+  const [Description, SetDescription] = useState('');
+  const [quantity, SetQuantity] = useState(1);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!Description) return
+    const newItem = {
+      id: Date.now(),
+      description: Description,
+      quantity: quantity,
+      packed: false
+    };
+    onAdditems(newItem);
+    SetDescription('');
+    SetQuantity(1);
+  }
+
+  return (
+    <form className="add-form" onSubmit={handleSubmit}>
+      <h3>List your task</h3>
+      <select value={quantity} onChange={(e) => SetQuantity(e.target.value)}>
+        {Array.from({length: 10}, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>{num}</option>
+        ))}
+      </select>
+      <input
+        type="text"
+        value={Description}
+        onChange={(e) => SetDescription(e.target.value)}
+      />
+      <button >Add</button>
+    </form>
+  );
+}
+
+function TaskList({items,handleDelete,handleToggle,handleClearData}) {
+  const [Sortby,setSortby] = useState('input')
+  let Sortitems
+  if(Sortby === 'input') Sortitems = items;
+
+  if(Sortby === 'description') Sortitems = items.slice().sort((a,b)=>a.description.localeCompare(b.description));
+  
+  if(Sortby === 'checked') 
+    Sortitems = items.slice().sort((a, b) => Number(a.packed) - Number(b.packed));
+
+
+    return (
+    <div className="list">
+      <ul>
+        {Sortitems.map((item) => (
+          <Item key={item.id} item={item} handleDelete={handleDelete} handleToggle={handleToggle} />
+        ))}
+      </ul>
+        <div className='actions'>
+          <select value={Sortby} onChange={(e)=> setSortby(e.target.value)}>
+            <option value='input'>sort by input</option>
+            <option value='description'>sort by description</option>
+            <option value='checked'>check stats</option>
+          </select>
+          
+          <button onClick={handleClearData}>Clear</button>
+        </div>
+    </div>
+  );
+}
+
+function Item({item,handleDelete,handleToggle}) {
+
+  return (
+    <li>
+      <input
+      type='checkbox'
+      value={item.packed}
+      onChange={()=>handleToggle(item.id)}/> 
+      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
+        {item.description} - {item.quantity}
+      </span>
+      <button onClick={() => handleDelete(item.id)}>x</button>
+    </li>
+  );
+}
+
+function Stats({items}){
+  const Numitem = items.length
+  const Checked = items.filter((item)=>item.packed).length
+  const Percentage = Math.round((Checked /Numitem) * 100);
+  
+  if(!items.length)
+    return(
+  <div className='footer'>
+    No task
+  </div>
+    )
+
+  return (
+    <footer className='stats'>
+      {Percentage === 100 ?
+      'ทำทุกอย่างเสร็จหมดแล้ว' :  <em> คุณมี {Numitem} รายการที่ทำเสร็จแล้ว {Checked} คิดเป็น {Percentage}%</em>}
+    </footer>
+  );
+}
+
+export default App;

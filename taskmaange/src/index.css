@@ -1,0 +1,140 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  background: #f0f0f0; /* พื้นหลังสีอ่อน */
+  color: #333; /* สีตัวอักษร */
+  line-height: 1.6;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* เต็มความสูงของหน้าจอ */
+  padding: 2rem;
+}
+
+.App-header {
+  background: linear-gradient(90deg, #ff6f61, #de5d83); /* ไล่ระดับสี */
+  color: #fff;
+  padding: 2rem;
+  border-radius: 10px; /* มุมโค้ง */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* เงา */
+  text-align: center;
+  margin-bottom: 2rem; /* ระยะห่างด้านล่าง */
+}
+
+h1 {
+  font-family: "Monoton", cursive;
+  font-size: 6rem; /* ขนาดฟอนต์ที่ใหญ่ขึ้น */
+  margin-bottom: 1rem;
+}
+
+.add-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff; /* สีพื้นหลัง */
+  padding: 1.5rem;
+  border-radius: 10px; /* มุมโค้ง */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* เงา */
+  margin: 2rem 0; /* ระยะห่าง */
+  width: 100%; /* เต็มความกว้าง */
+  max-width: 600px; /* ความกว้างสูงสุด */
+}
+
+h3 {
+  margin-right: 1rem;
+  font-size: 2.5rem; /* ขนาดฟอนต์ที่ใหญ่ขึ้น */
+  color: #ff6f61; /* สีตัวอักษร */
+}
+
+button,
+select,
+input {
+  border: none;
+  border-radius: 5px; /* มุมโค้ง */
+  padding: 0.8rem 1.5rem; /* ปรับขนาด padding */
+  margin-left: 1rem;
+  font-size: 2rem; /* ขนาดฟอนต์ที่ปรับใหม่ */
+  cursor: pointer;
+  transition: background 0.3s ease; /* การเปลี่ยนแปลงพื้นหลังเมื่อโฮเวอร์ */
+}
+
+button {
+  background-color: #76c7ad; /* ปุ่มสีเขียว */
+  color: #fff;
+}
+
+button:hover {
+  background-color: #68b59f; /* สีเมื่อโฮเวอร์ */
+}
+
+.list {
+  background-color: #ffffff; /* สีพื้นหลัง */
+  border-radius: 10px; /* มุมโค้ง */
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px; /* ความกว้างสูงสุด */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* เงา */
+  margin: 0; /* ไม่มีระยะห่าง */
+}
+
+.list ul {
+  list-style: none;
+  padding: 0;
+  display: flex; /* ใช้ Flexbox */
+  flex-wrap: wrap; /* ทำให้รายการห่อกันเป็นแถว */
+}
+
+.list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9; /* สีพื้นหลังของรายการ */
+  padding: 1rem;
+  margin: 1.5rem 0; /* ระยะห่างระหว่างรายการ */
+  border-radius: 5px; /* มุมโค้ง */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* เงา */
+  font-size: 2rem; /* ขนาดฟอนต์ที่ปรับเพิ่มในรายการ */
+}
+
+input[type="checkbox"] {
+  margin-right: 1rem;
+  accent-color: #ff6f61; /* สีของ checkbox */
+}
+
+.stats {
+  background-color: #ff6f61; /* สีของสถิติ */
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px; /* มุมโค้ง */
+  width: 100%;
+  max-width: 600px; /* ความกว้างสูงสุด */
+  margin-top: 2rem; /* ระยะห่าง */
+}
+
+/* เพิ่ม CSS สำหรับจัดเนื้อหาทั้งหมดให้อยู่กลาง */
+.App > * {
+  width: 100%; /* ขยายให้เต็มความกว้าง */
+  max-width: 800px; /* ขนาดสูงสุด */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* จัดตรงกลาง */
+}
+
+.add-form {
+  flex-direction: row; /* จัดให้ปุ่มอยู่ในแนวนอน */
+}
